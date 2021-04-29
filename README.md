@@ -22,14 +22,14 @@ I'm a Site Reliability Engineer <a href="https://github.com/malwarebytes">@malwa
 
 ### Languages and Frameworks:
 <p align="left">
-  <img src="https://github.com/ImDevinC/ImDevinC/blob/master/src/icons/python_48x48.png" alt="python"/>
-  <img src="https://github.com/ImDevinC/ImDevinC/blob/master/src/icons/go_48x48.png" alt="golang"/>
-  <img src="https://github.com/ImDevinC/ImDevinC/blob/master/src/icons/node_48x48.png" alt="nodejs"/>
-  <img src="https://github.com/ImDevinC/ImDevinC/blob/master/src/icons/cpp_48x48.png" alt="C++"/>
-  <img src="https://github.com/ImDevinC/ImDevinC/blob/master/src/icons/android_48x48.png" alt="android"/>
-  <img src="https://github.com/ImDevinC/ImDevinC/blob/master/src/icons/aws_48x48.png" alt="aws"/>
-  <img src="https://github.com/ImDevinC/ImDevinC/blob/master/src/icons/terraform_48x48.png" alt="terraform"/>
-  <img src="https://github.com/ImDevinC/ImDevinC/blob/master/src/icons/jenkins_48x48.png" alt="jenkins"/>
+  <img src="https://raw.githubusercontent.com/ImDevinC/ImDevinC/master/icons/python_48x48.png" alt="python"/>
+  <img src="https://raw.githubusercontent.com/ImDevinC/ImDevinC/master/icons/go_48x48.png" alt="golang"/>
+  <img src="https://raw.githubusercontent.com/ImDevinC/ImDevinC/master/icons/node_48x48.png" alt="nodejs"/>
+  <img src="https://raw.githubusercontent.com/ImDevinC/ImDevinC/master/icons/cpp_48x48.png" alt="C++"/>
+  <img src="https://raw.githubusercontent.com/ImDevinC/ImDevinC/master/icons/android_48x48.png" alt="android"/>
+  <img src="https://raw.githubusercontent.com/ImDevinC/ImDevinC/master/icons/aws_48x48.png" alt="aws"/>
+  <img src="https://raw.githubusercontent.com/ImDevinC/ImDevinC/master/icons/terraform_48x48.png" alt="terraform"/>
+  <img src="https://raw.githubusercontent.com/ImDevinC/ImDevinC/master/icons/jenkins_48x48.png" alt="jenkins"/>
 </p>
 <br/>
 
