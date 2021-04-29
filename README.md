@@ -21,7 +21,7 @@ I'm a Site Reliability Engineer <a href="https://github.com/malwarebytes">@malwa
 <br/>
 
 ### Languages and Frameworks:
-<p align="left">
+<p align="left" style="background-color:rgb(255,255,255,.25);padding:5px;border-radius:5px;">
   <img src="https://raw.githubusercontent.com/ImDevinC/ImDevinC/master/icons/python_48x48.png" alt="python"/>
   <img src="https://raw.githubusercontent.com/ImDevinC/ImDevinC/master/icons/go_48x48.png" alt="golang"/>
   <img src="https://raw.githubusercontent.com/ImDevinC/ImDevinC/master/icons/node_48x48.png" alt="nodejs"/>
@@ -35,7 +35,7 @@ I'm a Site Reliability Engineer <a href="https://github.com/malwarebytes">@malwa
 
 ### Connect with me:
 
-<p align="left">
+<p align="left" style="background-color:rgb(255,255,255,.25);padding:5px;border-radius:5px;">
   <a href="https://www.instagram.com/agent14709/" target="blank"><img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/instagram.svg" alt="agent14709" height="48" width="48" /></a> &nbsp;&nbsp;
   <a href="https://twitter.com/ImDevinC" target="blank"><img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/twitter.svg" alt="ImDevinC" height="48" width="48" /></a> &nbsp;&nbsp;
 </p>
