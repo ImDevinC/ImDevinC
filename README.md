@@ -1,4 +1,4 @@
-I'm a Site Reliability Engineer <a href="https://github.com/malwarebytes">@malwarebytes</a> who's major focus is finding ways to make anything we do more efficient, more reliable, and more cost effective.
+I'm a Site Reliability Engineer who's major focus is finding ways to make anything we do more efficient, more reliable, and more cost effective.
 
 ### 💼 Things I'm currently doing:
 <details>
