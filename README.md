@@ -36,8 +36,8 @@ I'm a Site Reliability Engineer who's major focus is finding ways to make anythi
 ### Connect with me:
 
 <p align="left" style="background-color:rgb(255,255,255,.25);padding:5px;border-radius:5px;">
-  <a href="https://www.instagram.com/agent14709/" target="blank"><img src="https://raw.githubusercontent.com/ImDevinC/ImDevinC/master/icons/instagram.png" alt="instagram"/></a> &nbsp;&nbsp;
-  <a href="https://twitter.com/ImDevinC" target="blank"><img src="https://raw.githubusercontent.com/ImDevinC/ImDevinC/master/icons/twitter_48x48.png" alt="twitter"/></a> &nbsp;&nbsp;
+  <a href="https://www.instagram.com/agent14709/" target="blank"><img src="https://raw.githubusercontent.com/ImDevinC/ImDevinC/master/icons/instagram.png" alt="instagram" height="48"/></a> &nbsp;&nbsp;
+  <a href="https://twitter.com/ImDevinC" target="blank"><img src="https://raw.githubusercontent.com/ImDevinC/ImDevinC/master/icons/twitter_48x48.png" alt="twitter"height ="48"/></a> &nbsp;&nbsp;
 </p>
 
 ---
