@@ -10,9 +10,9 @@ I'm a Site Reliability Engineer who's major focus is finding ways to make anythi
 </details>
 <br/>
 
-### 🌱 Things I'm challening myself with:
+### 🌱 Things I'm challenging myself with:
 <details>
-  <summary>With quarantine underway, I needed to find new ways to keep busy and entertained. Here's a list of things I've tried to keep doing to keep staying busy and focused.</summary><br/>
+  <summary>In an effort to keep improving myself, I'm always looking at new hobbies to pick up.</summary><br/>
 
   + [Stream](https://twitch.tv/gnomebytes) two nights a week to keep up interaction with others and break from programming.
   + Create a better work/life balance for myself to spend more time with my family.
@@ -36,7 +36,6 @@ I'm a Site Reliability Engineer who's major focus is finding ways to make anythi
 ### Connect with me:
 
 <p align="left" style="background-color:rgb(255,255,255,.25);padding:5px;border-radius:5px;">
-  <a href="https://www.instagram.com/agent14709/" target="blank"><img src="https://raw.githubusercontent.com/ImDevinC/ImDevinC/master/icons/instagram.png" alt="instagram" height="48"/></a> &nbsp;&nbsp;
   <a href="https://twitter.com/ImDevinC" target="blank"><img src="https://raw.githubusercontent.com/ImDevinC/ImDevinC/master/icons/twitter_48x48.png" alt="twitter"height ="48"/></a> &nbsp;&nbsp;
 </p>
 
