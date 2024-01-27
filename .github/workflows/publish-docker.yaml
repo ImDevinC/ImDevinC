@@ -1,13 +1,13 @@
 on:
   workflow_call:
-    secrets:
-      GHCR_PAT:
-        required: true
 
 jobs:
   publish:
     name: Publish
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      package: write
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -23,7 +23,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_PAT }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract metadata
         id: meta
