@@ -7,6 +7,10 @@ jobs:
   check-pr:
     name: Validate release label and notes
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: read
+      pull-requests: read
     steps:
       - name: Checkout
         uses: actions/checkout@v3
