@@ -1,8 +1,9 @@
 name: Bump SemVer Tags
 
 on:
-  pull_request:
-    types: [labeled, unlabeled, opened, edited, synchronize, ready_for_review]
+  push:
+    branches:
+      - master
 
 jobs:
   check-pr:
