@@ -35,7 +35,7 @@ jobs:
     needs:
       - bump-tag-version
     runs-on: ubuntu-latest
-    if: needs.bump-tag-version.outputs.version != ""
+    if: needs.bump-tag-version.outputs.version != ''
     steps:
       - name: Checkout
         uses: actions/checkout@v3
