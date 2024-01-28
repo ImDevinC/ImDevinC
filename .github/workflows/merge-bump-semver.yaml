@@ -1,4 +1,4 @@
-name: Validate release info
+name: Bump SemVer Tags
 
 on:
   pull_request:
