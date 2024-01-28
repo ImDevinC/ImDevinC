@@ -6,9 +6,6 @@ on:
         default: "linux/amd64,linux/arm64"
         required: false
         type: string
-    secrets:
-      GITHUB_TOKEN:
-        required: true
 
 jobs:
   publish:
