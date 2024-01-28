@@ -8,6 +8,8 @@ on:
         default: true
         required: false
         type: boolean
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   bump-tag-version:
