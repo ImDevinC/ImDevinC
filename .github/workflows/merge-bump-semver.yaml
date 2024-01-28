@@ -3,9 +3,9 @@ name: Bump SemVer Tags
 on:
   push:
     branches:
-      - master
+      - main
     paths:
-      - './github/workflows/*'
+      - '.github/workflows/*'
 
 jobs:
   check-pr:
