@@ -9,7 +9,8 @@ on:
         required: false
         type: boolean
     secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN:
+        required: true
 
 jobs:
   bump-tag-version:
