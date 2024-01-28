@@ -32,4 +32,4 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
-          chart_dir: ${{ github.event.inputs.chart-dir }}
+          charts_dir: ${{ github.event.inputs.chart-dir }}
