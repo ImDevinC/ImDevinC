@@ -2,11 +2,19 @@ name: Bump SemVer Tags
 
 on:
   workflow_call:
+    inputs:
+      include-v-prefix:
+        description: "Include V prefix on published version"
+        default: true
+        required: false
+        type: boolean
 
 jobs:
   bump-tag-version:
     name: Bump and tag version
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.bump.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -14,9 +22,33 @@ jobs:
           fetch-depth: 0
       - name: Validate PR metadata
         uses: jefflinse/pr-semver-bump@v1.6.0
+        id: bump
         with:
           mode: bump
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           minor-label: minor
           major-label: major
           patch-label: patch
+          with-v: ${{ inputs.include-v-prefix }}
+  update-major-version:
+    name: Update major version
+    needs:
+      - bump-tag-version
+    runs-on: ubuntu-latest
+    if: bump-tag-version.outputs.version != ""
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Parse major version
+        id: parse
+        run: |
+          VERSION=${{ needs.bump-tag-version.outputs.version }}
+          VERSION="${VERSION#[vV]}"
+          MAJOR_VERSION="${VERSION%%\.*}"
+          echo ::set-output name=major-version::${MAJOR_VERSION}
+      - name: Republish major version
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git tag -fa v${{ steps.parse.outputs.major-version }} -m "Update v${{ steps.parse.outputs.major-version }} tag"
+          git push origin v${{ steps.parse.outputs.major-version }} --force
