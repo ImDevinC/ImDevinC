@@ -45,6 +45,7 @@ jobs:
             latest
             type=ref,event=branch
             type=semver,pattern={{version}}
+            type=semver,pattern={{major}}
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
 
       - name: Build Docker image
