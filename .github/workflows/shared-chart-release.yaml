@@ -2,6 +2,11 @@ name: Release Chart
 
 on:
   workflow_call:
+    inputs:
+      chart-dir:
+        description: 'The directory containing the Chart.yaml file'
+        required: true
+        type: string
 
 jobs:
   release:
@@ -26,3 +31,5 @@ jobs:
         uses: helm/chart-releaser-action@v1.6.0
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        with:
+          chart_dir: ${{ github.event.inputs.chart-dir }}
