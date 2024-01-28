@@ -32,17 +32,18 @@ jobs:
           with-v: ${{ inputs.include-v-prefix }}
   update-major-version:
     name: Update major version
-    needs:
-      - bump-tag-version
+    # needs:
+    #   - bump-tag-version
     runs-on: ubuntu-latest
-    if: needs.bump-tag-version.outputs.version != ''
+    # if: needs.bump-tag-version.outputs.version != ''
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Parse major version
         id: parse
         run: |
-          VERSION=${{ needs.bump-tag-version.outputs.version }}
+          # VERSION=${{ needs.bump-tag-version.outputs.version }}
+          VERSION=v1.0.1
           VERSION="${VERSION#[vV]}"
           MAJOR_VERSION="${VERSION%%\.*}"
           echo ::set-output name=major-version::${MAJOR_VERSION}
