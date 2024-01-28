@@ -13,6 +13,10 @@ jobs:
   bump-tag-version:
     name: Bump and tag version
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: read
+      pull-requests: read
     outputs:
       version: ${{ steps.bump.outputs.version }}
     steps:
