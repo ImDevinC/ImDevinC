@@ -1,0 +1,22 @@
+name: Validate PR metadata
+
+on:
+  workflow_call:
+
+jobs:
+  check-pr:
+    name: Validate release label and notes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Validate PR metadata
+        uses: jefflinse/pr-semver-bump@v1.6.0
+        with:
+          mode: validate
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          minor-label: minor
+          major-label: major
+          patch-label: patch
