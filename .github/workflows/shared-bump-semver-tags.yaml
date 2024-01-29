@@ -8,6 +8,11 @@ on:
         default: true
         required: false
         type: boolean
+    secrets:
+      PUBLISH_PAT:
+        description: "Personal Access Token for publishing packages"
+        required: true
+        type: string
 
 jobs:
   bump-tag-version:
@@ -29,7 +34,7 @@ jobs:
         id: bump
         with:
           mode: bump
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.PUBLISH_PAT }}
           minor-label: minor
           major-label: major
           patch-label: patch
