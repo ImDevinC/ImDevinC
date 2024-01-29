@@ -10,3 +10,5 @@ on:
 jobs:
   check-pr:
     uses: ./.github/workflows/shared-bump-semver-tags.yaml
+    secret:
+      PUBLISH_PAT: ${{ secrets.GITHUB_TOKEN }}
