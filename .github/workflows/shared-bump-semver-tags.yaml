@@ -12,7 +12,6 @@ on:
       PUBLISH_PAT:
         description: "Personal Access Token for publishing packages"
         required: true
-        type: string
 
 jobs:
   bump-tag-version:
