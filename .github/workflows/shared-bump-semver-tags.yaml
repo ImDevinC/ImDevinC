@@ -8,6 +8,11 @@ on:
         default: true
         required: false
         type: boolean
+    secrets:
+      PUBLISH_PAT:
+        description: "Personal Access Token for publishing packages"
+        required: true
+        type: string
 
 jobs:
   bump-tag-version:
@@ -29,7 +34,7 @@ jobs:
         id: bump
         with:
           mode: bump
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.PUBLISH_PAT }}
           minor-label: minor
           major-label: major
           patch-label: patch
@@ -56,3 +61,5 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git tag -fa v${{ steps.parse.outputs.major-version }} -m "Update v${{ steps.parse.outputs.major-version }} tag"
           git push origin v${{ steps.parse.outputs.major-version }} --force
+        env:
+          GITHUB_TOKEN: ${{ secrets.PUBLISH_PAT }}
