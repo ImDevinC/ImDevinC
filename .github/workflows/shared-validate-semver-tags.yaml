@@ -13,7 +13,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Validate PR metadata
-        uses: jefflinse/pr-semver-bump@v1.6.0
+        uses: jefflinse/pr-semver-bump@v1.7.1
         with:
           mode: validate
           repo-token: ${{ secrets.GITHUB_TOKEN }}
