@@ -17,6 +17,8 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Set release variable
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Checkout
         uses: actions/checkout@v3
         with:
