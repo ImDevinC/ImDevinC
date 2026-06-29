@@ -1,10 +1,3 @@
-## Personal Migration
-
-> [!NOTE]
-> Starting in May 2026, I began migrating most of my projects to a personal Forgejo instance I self-host. This was due to a plethora of reasons
-> that I may eventually document at blog.imdevinc.com. I will still post public libraries here, and will keep the account available for working
-> with other people on GitHub.
-
 I'm a Site Reliability Engineer who's major focus is finding ways to make anything we do more efficient, more reliable, and more cost effective.
 
 ### 💼 Things I'm currently doing:
