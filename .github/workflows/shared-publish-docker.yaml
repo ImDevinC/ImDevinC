@@ -11,117 +11,29 @@ on:
         default: "linux/amd64,linux/arm64"
         required: false
         type: string
-      images:
-        description: >-
-          JSON array of image names or objects with name, context, file, and chart properties.
-          Names may be full ghcr.io references or repository-relative names. Defaults to this
-          repository's GHCR image. Objects may set context, file, or chart; the chart defaults
-          to the image's final path component and selects charts/<chart>/kustomization.yaml.
-        required: false
-        type: string
-      homelab-repository:
-        description: Repository whose chart kustomizations should be updated
-        default: ImDevinC/homelab
-        required: false
-        type: string
-      homelab-branch:
-        description: Branch in the homelab repository to update
-        default: main
-        required: false
-        type: string
-    secrets:
-      homelab-token:
-        description: Token with contents write access to the homelab repository
-        required: false
 
 jobs:
-  prepare:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.images.outputs.matrix }}
-    steps:
-      - name: Resolve images to publish
-        id: images
-        env:
-          IMAGES_INPUT: ${{ inputs.images }}
-          REPOSITORY: ${{ github.repository }}
-          OWNER: ${{ github.repository_owner }}
-        run: |
-          python3 - <<'PY'
-          import json
-          import os
-          from pathlib import PurePosixPath
-
-          raw = os.environ["IMAGES_INPUT"].strip()
-          if raw:
-              try:
-                  images = json.loads(raw)
-              except json.JSONDecodeError as error:
-                  raise SystemExit(f"images must be a JSON array: {error}")
-              if not isinstance(images, list) or not images:
-                  raise SystemExit("images must be a non-empty JSON array")
-          else:
-              images = [os.environ["REPOSITORY"]]
-
-          result = []
-          for item in images:
-              if isinstance(item, str):
-                  image = item.strip()
-                  config = {}
-              elif isinstance(item, dict):
-                  config = item
-                  image = str(config.get("name", "")).strip()
-              else:
-                  raise SystemExit("each images entry must be a name or an object")
-
-              if not image:
-                  raise SystemExit("each images entry must include a non-empty name")
-              if not image.startswith("ghcr.io/"):
-                  image = f"ghcr.io/{image if '/' in image else os.environ['OWNER'] + '/' + image}"
-              image = image.lower()
-              if ":" in image.rsplit("/", 1)[-1]:
-                  raise SystemExit(f"image names must not include a tag: {image}")
-
-              chart = str(config.get("chart") or PurePosixPath(image).name)
-              if chart.startswith("/") or ".." in PurePosixPath(chart).parts:
-                  raise SystemExit(f"chart must be a relative path: {chart}")
-              result.append({
-                  "image": image,
-                  "context": str(config.get("context") or "."),
-                  "file": str(config.get("file") or "Dockerfile"),
-                  "chart": chart,
-              })
-
-          with open(os.environ["GITHUB_OUTPUT"], "a") as output:
-              output.write("matrix=" + json.dumps({"include": result}) + "\n")
-          PY
-
   publish:
     name: Publish
     runs-on: ubuntu-latest
-    needs: prepare
-    strategy:
-      fail-fast: false
-      max-parallel: 1
-      matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
     permissions:
-      contents: write
+      contents: read
       packages: write
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
         with:
           ref: ${{ inputs.branch }}
           fetch-depth: 0
 
       - name: Setup QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v2
 
       - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v2
 
       - name: Login to registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -131,7 +43,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ matrix.image }}
+          images: ghcr.io/${{ github.repository }}
           labels: |
             org.opencontainers.image.source https://github.com/${{ github.repository }}
           tags: |
@@ -142,57 +54,9 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
 
       - name: Build Docker image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v5
         with:
-          context: ${{ matrix.context }}
-          file: ${{ matrix.file }}
           push: true
           platforms: ${{ inputs.platforms }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Check out homelab repository
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ inputs.homelab-repository }}
-          ref: ${{ inputs.homelab-branch }}
-          path: homelab
-          token: ${{ secrets.homelab-token || github.token }}
-
-      - name: Update homelab image tag
-        env:
-          IMAGE: ${{ matrix.image }}
-          CHART: ${{ matrix.chart }}
-          TAG: ${{ steps.meta.outputs.version }}
-          HOMELAB_BRANCH: ${{ inputs.homelab-branch }}
-        run: |
-          set -euo pipefail
-          curl -sSfL https://github.com/mikefarah/yq/releases/download/v4.44.3/yq_linux_amd64 -o /tmp/yq
-          chmod +x /tmp/yq
-          export PATH="/tmp:$PATH"
-          file="homelab/charts/${CHART}/kustomization.yaml"
-          if [[ ! -f "$file" ]]; then
-            echo "Expected kustomization file does not exist: $file" >&2
-            exit 1
-          fi
-          if [[ -z "$TAG" ]]; then
-            echo "Docker metadata did not produce an image tag" >&2
-            exit 1
-          fi
-
-          if yq -e '.images[] | select(.name == strenv(IMAGE))' "$file" >/dev/null; then
-            yq -i '(.images[] | select(.name == strenv(IMAGE)).newTag) = strenv(TAG)' "$file"
-          else
-            yq -i '.images = ((.images // []) + [{"name": strenv(IMAGE), "newTag": strenv(TAG)}])' "$file"
-          fi
-
-          cd homelab
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          git add "charts/${CHART}/kustomization.yaml"
-          if git diff --cached --quiet; then
-            echo "Image tag is already current; no commit needed."
-            exit 0
-          fi
-          git commit -m "chore: update ${IMAGE} image tag to ${TAG}"
-          git push origin "HEAD:${HOMELAB_BRANCH}"
