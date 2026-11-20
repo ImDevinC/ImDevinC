@@ -37,6 +37,8 @@ jobs:
           minor-label: minor
           major-label: major
           patch-label: patch
+          noop-labels:
+            - chore
           with-v: ${{ inputs.include-v-prefix }}
   update-major-version:
     name: Update major version
@@ -62,3 +64,4 @@ jobs:
           git push origin v${{ steps.parse.outputs.major-version }} --force
         env:
           GITHUB_TOKEN: ${{ secrets.PUBLISH_PAT }}
+
