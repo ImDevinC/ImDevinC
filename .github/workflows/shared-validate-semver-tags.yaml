@@ -20,6 +20,6 @@ jobs:
           minor-label: minor
           major-label: major
           patch-label: patch
-          noop-labels:
-            - chore
-            - documentation
+          noop-labels: |
+            chore
+            documentation
