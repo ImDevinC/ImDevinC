@@ -1,4 +1,5 @@
 name: Bump SemVer Tags
+# Release-only PR, no workflow behavior change.
 
 on:
   push:
